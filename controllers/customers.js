@@ -16,7 +16,6 @@ const listAllCustomers = async (req, res, next) => {
 };
 
 const writeNewCustomer = async (req, res, next) => {
-  console.log(req.body.firstName);
   const newUser = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
