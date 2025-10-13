@@ -1,0 +1,96 @@
+@base = http://localhost:3000
+@baseRemote = https://cse341-web-services-z6lg.onrender.com
+
+// CUSTOMERS routes
+
+### list customers in DB
+get {{base}}/customers
+
+### insert new customer to DB
+post {{base}}/customers/writeNewCustomer HTTP/1.1 
+content-type: application/json
+
+{
+    "firstName":"Marshall",
+    "lastName":"Mathers",
+    "email":"pottymouth@eminem.com",
+    "phoneNumber":"123-555-2345",
+    "lastOrderDate":"2025-10-13"
+}
+
+
+
+// ORDERS routes
+### list users in DB
+get {{base}}/contacts/user
+
+### list a single user (currently hardcoded for ID)
+get {{base}}/contacts/username
+
+### list a single user (currently hardcoded to find ID by a given user name)
+get {{base}}/contacts/userID
+
+
+// WEEK 3 ROUTES
+### insert new user to DB
+post {{base}}/contacts/writeNewUser HTTP/1.1 
+content-type: application/json
+
+{
+    "firstName":"Steve-O",
+    "lastName":"Jensen",
+    "email":"thevandals@wearepunkers.com",
+    "favoriteColor":"Orange",
+    "birthday":"1959-04-29"
+}
+
+###
+put {{base}}/contacts/updateUser/68e14b5f3a66dad0a4065225 HTTP/1.1 
+content-type: application/json
+
+{
+    "firstName":"Steven",
+    "lastName":"Jensen",
+    "email":"thevandals@wearepunkers.com",
+    "favoriteColor":"Orange",
+    "birthday":"1959-04-29"
+}
+
+###
+delete {{base}}/contacts/deleteUser/68e1ab65d25770d973affebe HTTP/1.1
+
+
+
+// REMOTE TESTS ON RENDER
+
+###
+get {{baseRemote}}
+
+### INSERT new user on Render
+post {{baseRemote}}/contacts/writeNewUser HTTP/1.1 
+content-type: application/json
+
+{
+    "firstName":"Mark",
+    "lastName":"Adkins",
+    "email":"guttermouth@thisispunkrock.com",
+    "favoriteColor":"Yellow",
+    "birthday":"1968-10-10"
+}
+
+### UPDATE user on Render
+put {{baseRemote}}/contacts/updateUser/68dee6566bd1e3bce944047e HTTP/1.1 
+content-type: application/json
+
+{
+    "firstName":"Jonny",
+    "lastName":"Rotten",
+    "email":"sexpistols@wepunkers.com",
+    "favoriteColor":"Gray",
+    "birthday":"1956-01-31"
+}
+
+### DELETE user on Render
+delete {{baseRemote}}/contacts/deleteUser/68d4427bcb041dfaa6d6cb02 HTTP/1.1
+
+
