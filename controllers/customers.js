@@ -31,6 +31,34 @@ const writeNewCustomer = async (req, res, next) => {
   }
 };
 
+const updateCustomer = async (req, res) => {
+  const userId = new ObjectId(req.params.id);
+  const contact = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    phoneNumber: req.body.phoneNumber,
+    lastOrderDate: req.body.lastOrderDate
+  };
+  const response = await mongodb.getDb().db('project_two').collection('customers').replaceOne({ _id: userId }, contact);
+  if (response.modifiedCount > 0) {
+    res.status(204).send();
+  } else {
+    res.status(500).json(response.error || 'Some error occurred while updating the contact.');
+  }
+};
+
+const deleteCustomer = async (req, res) => {
+  const userId = new ObjectId(req.params.id);
+  const response = await mongodb.getDb().db('project_two').collection('customers').deleteOne({ _id: userId }, true);
+  console.log(response);
+  if (response.deletedCount > 0) {
+    res.status(204).send();
+  } else {
+    res.status(500).json(response.error || 'Some error occurred while deleting the contact.');
+  }
+};
+
 /* const getUsername = async (req, res, next) => {
   const result = await mongodb.getDb().db('web_services').collection('users').find();
   result.toArray().then((lists) => {
@@ -54,39 +82,7 @@ const writeNewCustomer = async (req, res, next) => {
 
 
 
-/* const deleteUser = async (req, res) => {
-  const userId = new ObjectId(req.params.id);
-  const response = await mongodb.getDb().db('web_services').collection('users').deleteOne({ _id: userId }, true);
-  console.log(response);
-  if (response.deletedCount > 0) {
-    res.status(204).send();
-  } else {
-    res.status(500).json(response.error || 'Some error occurred while deleting the contact.');
-  }
-}; */
 
 
-/* const updateUser = async (req, res) => {
-  const userId = new ObjectId(req.params.id);
-  const contact = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    favoriteColor: req.body.favoriteColor,
-    birthday: req.body.birthday
-  };
-  const response = await mongodb
-    .getDb()
-    .db('web_services')
-    .collection('users')
-    .replaceOne({ _id: userId }, contact);
-  console.log(response);
-  if (response.modifiedCount > 0) {
-    res.status(204).send();
-  } else {
-    res.status(500).json(response.error || 'Some error occurred while updating the contact.');
-  }
-}; */
 
-
-module.exports = { listAllCustomers, writeNewCustomer };
+module.exports = { listAllCustomers, writeNewCustomer, updateCustomer, deleteCustomer };

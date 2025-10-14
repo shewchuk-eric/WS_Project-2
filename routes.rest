@@ -18,46 +18,26 @@ content-type: application/json
     "lastOrderDate":"2025-10-13"
 }
 
+### update customer in DB
+put {{base}}/customers/updateCustomer/68ed60e14244ffa80b71dbde HTTP/1.1 
+content-type: application/json
 
+{
+    "firstName":"Marshall",
+    "lastName":"Mathers",
+    "email":"pottymouth@eminem.com",
+    "phoneNumber":"123-555-0000",
+    "lastOrderDate":"2025-10-13"
+}
+
+### delete customer in DB
+delete {{base}}/customers/deleteCustomer/68ed60e14244ffa80b71dbde HTTP/1.1
 
 // ORDERS routes
-### list users in DB
-get {{base}}/contacts/user
-
-### list a single user (currently hardcoded for ID)
-get {{base}}/contacts/username
-
-### list a single user (currently hardcoded to find ID by a given user name)
-get {{base}}/contacts/userID
 
 
-// WEEK 3 ROUTES
-### insert new user to DB
-post {{base}}/contacts/writeNewUser HTTP/1.1 
-content-type: application/json
 
-{
-    "firstName":"Steve-O",
-    "lastName":"Jensen",
-    "email":"thevandals@wearepunkers.com",
-    "favoriteColor":"Orange",
-    "birthday":"1959-04-29"
-}
 
-###
-put {{base}}/contacts/updateUser/68e14b5f3a66dad0a4065225 HTTP/1.1 
-content-type: application/json
-
-{
-    "firstName":"Steven",
-    "lastName":"Jensen",
-    "email":"thevandals@wearepunkers.com",
-    "favoriteColor":"Orange",
-    "birthday":"1959-04-29"
-}
-
-###
-delete {{base}}/contacts/deleteUser/68e1ab65d25770d973affebe HTTP/1.1
 
 
 
