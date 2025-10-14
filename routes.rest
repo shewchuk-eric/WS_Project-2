@@ -1,5 +1,5 @@
 @base = http://localhost:3000
-@baseRemote = https://cse341-web-services-z6lg.onrender.com
+@baseRemote = https://ws-project-2.onrender.com
 
 // CUSTOMERS routes
 
@@ -43,34 +43,32 @@ delete {{base}}/customers/deleteCustomer/68ed60e14244ffa80b71dbde HTTP/1.1
 
 // REMOTE TESTS ON RENDER
 
-###
-get {{baseRemote}}
+### list customers in DB - RENDER
+get {{baseRemote}}/customers
 
-### INSERT new user on Render
-post {{baseRemote}}/contacts/writeNewUser HTTP/1.1 
+### insert new customer to DB - RENDER
+post {{baseRemote}}/customers/writeNewCustomer HTTP/1.1 
 content-type: application/json
 
 {
-    "firstName":"Mark",
-    "lastName":"Adkins",
-    "email":"guttermouth@thisispunkrock.com",
-    "favoriteColor":"Yellow",
-    "birthday":"1968-10-10"
+    "firstName":"Marshall",
+    "lastName":"Mathers",
+    "email":"pottymouth@eminem.com",
+    "phoneNumber":"123-555-2345",
+    "lastOrderDate":"2025-10-13"
 }
 
-### UPDATE user on Render
-put {{baseRemote}}/contacts/updateUser/68dee6566bd1e3bce944047e HTTP/1.1 
+### update customer in DB - RENDER
+put {{baseRemote}}/customers/updateCustomer/68ed60e14244ffa80b71dbde HTTP/1.1 
 content-type: application/json
 
 {
-    "firstName":"Jonny",
-    "lastName":"Rotten",
-    "email":"sexpistols@wepunkers.com",
-    "favoriteColor":"Gray",
-    "birthday":"1956-01-31"
+    "firstName":"Marshall",
+    "lastName":"Mathers",
+    "email":"pottymouth@eminem.com",
+    "phoneNumber":"123-555-0000",
+    "lastOrderDate":"2025-10-13"
 }
 
-### DELETE user on Render
-delete {{baseRemote}}/contacts/deleteUser/68d4427bcb041dfaa6d6cb02 HTTP/1.1
-
-
+### delete customer in DB - RENDER
+delete {{baseRemote}}/customers/deleteCustomer/68ed60e14244ffa80b71dbde HTTP/1.1
