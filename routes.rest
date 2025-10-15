@@ -1,7 +1,10 @@
 @base = http://localhost:3000
-@baseRemote = https://ws-project-2.onrender.com
+@remote = https://ws-project-2.onrender.com
 
-// CUSTOMERS routes
+
+//***************************
+// CUSTOMERS routes (LOCAL) *
+//***************************
 
 ### list customers in DB
 get {{base}}/customers
@@ -11,11 +14,11 @@ post {{base}}/customers/writeNewCustomer HTTP/1.1
 content-type: application/json
 
 {
-    "firstName":"Marshall",
-    "lastName":"Mathers",
-    "email":"pottymouth@eminem.com",
-    "phoneNumber":"123-555-2345",
-    "lastOrderDate":"2025-10-13"
+    "firstName":"Robert",
+    "lastName":"Plant",
+    "email":"classicrock@gmail.com",
+    "phoneNumber":"123-456-2345",
+    "lastOrderDate":""
 }
 
 ### update customer in DB
@@ -31,23 +34,74 @@ content-type: application/json
 }
 
 ### delete customer in DB
-delete {{base}}/customers/deleteCustomer/68ed60e14244ffa80b71dbde HTTP/1.1
+delete {{base}}/customers/deleteCustomer/68eff417ccfe7d3dd5d640e0 HTTP/1.1
 
-// ORDERS routes
+### update last order date for customer in DB
+patch {{base}}/customers/lastOrderDate/68ed589ded9a4f9a24b2b164 HTTP/1.1 
+content-type: application/json
+
+{
+    "lastOrderDate":""
+}
+
+//************************
+// ORDERS routes (LOCAL) *
+//************************
+
+### list orders in DB
+get {{base}}/orders
+
+### create new order in DB
+post {{base}}/orders/createOrder/ HTTP/1.1
+content-type: application/json
+
+{
+    "customerId":"68eff43dad7407e5020c901d",
+    "crust": "Thin And Crispy",
+    "sauce": "Blend",
+    "cheese": "Alfredo",
+    "vegToppings": ["Red Onions"],
+    "meatToppings": ["Bacon"],
+    "orderStatus": "",
+    "orderDate": ""
+}
+
+### update order in DB
+put {{base}}/orders/updateOrder/68f00926ab19af1475570d25 HTTP/1.1
+content-type: application/json
+
+{
+    "customerId":"68ed589ded9a4f9a24b2b164",
+    "crust": "Pan",
+    "sauce": "Marinara",
+    "cheese": "Mozzarella",
+    "vegToppings": ["Onions", "Mushrooms", "Olives"],
+    "MeatToppings": [],
+    "orderStatus": "",
+    "orderDate": ""
+}
+
+### cancel order in DB
+delete {{base}}/orders/cancelOrder/68f00926ab19af1475570d25 HTTP/1.1
+
+### update order status in DB
+patch {{base}}/orders/updateOrderStatus/68f007429a5888e885bf2603 HTTP/1.1
+content-type: application/json
+
+{
+    "orderStatus":""
+}
 
 
+//****************************
+// CUSTOMERS routes (RENDER) *
+//****************************
 
+### list customers in DB
+get {{remote}}/customers
 
-
-
-
-// REMOTE TESTS ON RENDER
-
-### list customers in DB - RENDER
-get {{baseRemote}}/customers
-
-### insert new customer to DB - RENDER
-post {{baseRemote}}/customers/writeNewCustomer HTTP/1.1 
+### insert new customer to DB
+post {{remote}}/customers/writeNewCustomer HTTP/1.1 
 content-type: application/json
 
 {
@@ -58,8 +112,8 @@ content-type: application/json
     "lastOrderDate":"2025-10-13"
 }
 
-### update customer in DB - RENDER
-put {{baseRemote}}/customers/updateCustomer/68ed60e14244ffa80b71dbde HTTP/1.1 
+### update customer in DB
+put {{remote}}/customers/updateCustomer/68ed60e14244ffa80b71dbde HTTP/1.1 
 content-type: application/json
 
 {
@@ -70,5 +124,61 @@ content-type: application/json
     "lastOrderDate":"2025-10-13"
 }
 
-### delete customer in DB - RENDER
-delete {{baseRemote}}/customers/deleteCustomer/68ed60e14244ffa80b71dbde HTTP/1.1
+### delete customer in DB
+delete {{remote}}/customers/deleteCustomer/68ed60e14244ffa80b71dbde HTTP/1.1
+
+### update last order date for customer in DB
+patch {{remote}}/customers/lastOrderDate/68ed589ded9a4f9a24b2b164 HTTP/1.1 
+content-type: application/json
+
+{
+    "lastOrderDate":""
+}
+
+//*************************
+// ORDERS routes (RENDER) *
+//*************************
+
+### list orders in DB
+get {{remote}}/orders
+
+### create new order in DB
+post {{remote}}/orders/createOrder/ HTTP/1.1
+content-type: application/json
+
+{
+    "customerId":"68eff43dad7407e5020c901d",
+    "crust": "Thin And Crispy",
+    "sauce": "Blend",
+    "cheese": "Alfredo",
+    "vegToppings": ["Red Onions"],
+    "meatToppings": ["Bacon"],
+    "orderStatus": "",
+    "orderDate": ""
+}
+
+### update order in DB
+put {{remote}}/orders/updateOrder/68f00926ab19af1475570d25 HTTP/1.1
+content-type: application/json
+
+{
+    "customerId":"68ed589ded9a4f9a24b2b164",
+    "crust": "Pan",
+    "sauce": "Marinara",
+    "cheese": "Mozzarella",
+    "vegToppings": ["Onions", "Mushrooms", "Olives"],
+    "MeatToppings": [],
+    "orderStatus": "",
+    "orderDate": ""
+}
+
+### cancel order in DB
+delete {{remote}}/orders/cancelOrder/68f00926ab19af1475570d25 HTTP/1.1
+
+### update order status in DB
+patch {{remote}}/orders/updateOrderStatus/68f007429a5888e885bf2603 HTTP/1.1
+content-type: application/json
+
+{
+    "orderStatus":""
+}

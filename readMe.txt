@@ -4,6 +4,7 @@ npm i express // create localhost server
 npm i --save-dev nodemon // auto refresh localhost server
 npm i cors // needed for sending certain routes
 npm i mongodb 
+npm i joi // needed for validation
 
 // following three are for building the api documentation
 npm i swagger
@@ -16,3 +17,5 @@ npm i swagger-ui-express
 
 node index.js // run the app
 npm run swagger // build documentation
+
+http://localhost:3000/api-docs/#/

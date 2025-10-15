@@ -1,11 +1,12 @@
-const routes = require('express').Router();
+const orders = require('express').Router();
 const ordersController = require('../controllers/orders.js');
 
 
-//routes.get('/', ordersController.awesomeFunction); // this code goes only to the first exported function regardless of the function named
-//routes.get('/second', ordersController.anotherFunction); // giving a name allows drilling into file
-//routes.get('/third', ordersController.thirdFunction);
+orders.get('/', ordersController.listAllOrders); 
+orders.post('/createOrder/', ordersController.createOrder);
+orders.put('/updateOrder/:id', ordersController.updateOrder);
+orders.delete('/cancelOrder/:id', ordersController.cancelOrder);
+orders.patch('/updateOrderStatus/:id', ordersController.updateOrderStatus);
 
 
-module.exports = routes;
-
+module.exports = orders;

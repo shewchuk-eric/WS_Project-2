@@ -1,11 +1,9 @@
 const mongodb = require('../db/connect');
 const ObjectId = require('mongodb').ObjectId;
+const curDate = require('../models/getDate');
+const today = curDate.getToday();
+const { userSchema } = require('../models/validation');
 
- 
-/*
-customers.put('/updateCustomer/:id', customersController.updateCustomer);
-customers.delete('/deleteCustomer/:id', customersController.deleteCustomer
-customers.patch('/lastOrderDate/:id', customersController.lastOrderDate);*/
 
 const listAllCustomers = async (req, res, next) => {
   const result = await mongodb.getDb().db('project_two').collection('customers').find({});
@@ -16,12 +14,16 @@ const listAllCustomers = async (req, res, next) => {
 };
 
 const writeNewCustomer = async (req, res, next) => {
+  const { error } = userSchema.validate(req.body);
+  if (error) {
+    return res.status(400).json({ error: error.details[0].message });
+  }
   const newUser = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
     phoneNumber: req.body.phoneNumber,
-    lastOrderDate: req.body.lastOrderDate
+    lastOrderDate: `${today}`
   };
   const response = await mongodb.getDb().db('project_two').collection('customers').insertOne(newUser);
   if (response.acknowledged) {
@@ -59,30 +61,18 @@ const deleteCustomer = async (req, res) => {
   }
 };
 
-/* const getUsername = async (req, res, next) => {
-  const result = await mongodb.getDb().db('web_services').collection('users').find();
-  result.toArray().then((lists) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(lists[0].firstName + ' ' + lists[0].lastName);
-  });
-}; */
-
-/* const getUserByID = async (req, res, next) => {
-  const result = await mongodb.getDb().db('web_services').collection('users').find();
-  result.toArray().then((lists) => {
-    let id = lists[2]._id; //hardcoded to get the third user in the list - would normally get from req.params
-    res.setHeader('Content-Type', 'application/json');
-    lists.forEach(element => {
-      if (element._id == id) {
-        res.status(200).json(element.firstName + ' ' + element.lastName);
-    };
-  });
-});
-}; */
+const lastOrderDate = async (req, res) => {
+  const userId = new ObjectId(req.params.id);
+  const newDate = {
+    lastOrderDate: `${today}`
+  };
+  const response = await mongodb.getDb().db('project_two').collection('customers').updateOne({ _id: userId }, { $set: newDate });
+  if (response.modifiedCount > 0) {
+    res.status(204).send();
+  } else {
+    res.status(500).json(response.error || 'Some error occurred while updating the contact.');
+  }
+};
 
 
-
-
-
-
-module.exports = { listAllCustomers, writeNewCustomer, updateCustomer, deleteCustomer };
+module.exports = { listAllCustomers, writeNewCustomer, updateCustomer, deleteCustomer, lastOrderDate };
