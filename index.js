@@ -51,9 +51,6 @@ passport.deserializeUser((obj, done) => {
   done(null, obj);
 });
 
-  /**********************************************
-   * tutorial code follows *
-   **********************************************/
 
 app.get("/", (req, res) => {
   if(req.user) {res.send('<a href="/api-docs/#/">You are logged in. View Swagger docs</a>')
@@ -76,10 +73,6 @@ app.get("/logout", (req, res) => {
     res.redirect("/");
   });
 });
-
-/**********************************************
- * end tutorial code *
- **********************************************/
   
 
 mongodb.initDb((err, mongodb) => {
