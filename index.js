@@ -72,10 +72,6 @@ app.get(
   }
 );
 
-app.get("/profile", (req, res) => {
-  res.send(`Hello ${req.user.username}`);
-});
-
 app.get("/logout", (req, res) => {
   req.logout(() => {
     res.redirect("/");

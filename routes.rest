@@ -182,3 +182,23 @@ content-type: application/json
 {
     "orderStatus":""
 }
+
+
+//***********************
+// OAuth routes (LOCAL) *
+//***********************
+### LOGIN prompt
+get {{base}}
+
+### LOGOUT
+get {{base}}/logout
+
+
+//************************
+// OAuth routes (RENDER) *
+//************************
+### LOGIN prompt
+get {{remote}}
+
+### LOGOUT
+get {{remote}}/logout
