@@ -58,7 +58,6 @@ passport.deserializeUser((obj, done) => {
 app.get("/", (req, res) => {
   if(req.user) {res.send('<a href="/api-docs/#/">You are logged in. View Swagger docs</a>')
   } else {
-  //res.redirect('github/');
   res.send('<a href="/auth/github">Login with GitHub</a>');
 }});
 
