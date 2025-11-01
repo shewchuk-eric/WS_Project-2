@@ -64,6 +64,8 @@ app.get(
   "/auth/github/callback",
   passport.authenticate("github", { failureRedirect: "/" }),
   (req, res) => {
+    req.session.isLoggedIn = true;
+    req.session.username = req.user.username;
     res.redirect("/api-docs/#/");
   }
 );

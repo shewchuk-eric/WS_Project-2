@@ -30,10 +30,14 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         }
+        }
       }
-    },
+    ,
     "/customers/writeNewCustomer/": {
       "post": {
         "description": "",
