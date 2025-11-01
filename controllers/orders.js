@@ -1,10 +1,15 @@
 const mongodb = require('../db/connect');
 const ObjectId = require('mongodb').ObjectId;
-const curDate = require('../models/getDate');
-const today = curDate.getToday();
+const { requireLogin, getToday } = require('../models/utilities');
+const today = getToday();
 
 
 const listAllOrders = async (req, res, next) => {
+  let user = requireLogin(req, res, next);
+  if (!user || user != 'shewchuk-eric') {
+    res.status(403).json({ message: 'Forbidden. You do not have access to this resource.' });
+    return;
+  }
   const result = await mongodb.getDb().db('project_two').collection('orders').find({});
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');

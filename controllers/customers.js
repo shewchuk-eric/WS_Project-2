@@ -2,20 +2,9 @@ let username;
 
 const mongodb = require('../db/connect');
 const ObjectId = require('mongodb').ObjectId;
-const curDate = require('../models/getDate');
-const today = curDate.getToday();
-const { userSchema } = require('../models/validation');
-
-
-function requireLogin(req, res, next) {
-  if (req.session.isLoggedIn) {
-    username = req.session.username;
-    console.log(`Logged in as: ${username}`);
-    return(username); // User is logged in, continue to the route handler
-  } else {
-    return(false)
-  }
-}
+//const curDate = require('../models/getDate');
+const { userSchema, requireLogin, getToday } = require('../models/utilities');
+const today = getToday();
 
 
 const listAllCustomers = async (req, res, next) => {
