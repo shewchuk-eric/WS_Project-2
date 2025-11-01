@@ -11,7 +11,6 @@ const userSchema = Joi.object({
 function requireLogin(req, res, next) {
   if (req.session.isLoggedIn) {
     username = req.session.username;
-    console.log(`Logged in as: ${username}`);
     return(username); // User is logged in, continue to the route handler
   } else {
     return(false)

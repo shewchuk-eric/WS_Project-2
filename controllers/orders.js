@@ -41,20 +41,8 @@ const createOrder = async (req, res, next) => {
     res.status(201).json('Order created');
   } else {
     res.status(500).json(response.error || 'Something went wrong with submitting the order.');
-  } //updateOrderDate(req.body.customerId);
+  }
 }
-
-/* const updateOrderDate = async (req, res, customerId) => {
-  const newDate = {
-        lastOrderDate: `${today}`
-    };
-    const updateResponse = await mongodb.getDb().db('project_two').collection('customers').updateOne({ _id: customerId }, { $set: newDate });
-    if (updateResponse.modifiedCount > 0) {
-        res.status(204).send();
-    } else {
-        res.status(500).json(updateResponse.error || 'Some error occurred while updating the customer\'s last purchase date.');
-    }
-}; */
 
 const updateOrder = async (req, res) => {
     if (!req.body.customerId) {
@@ -96,6 +84,11 @@ const cancelOrder = async (req, res) => {
 };
 
 const updateOrderStatus = async (req, res) => {
+  let user = requireLogin(req, res, next);
+  if (!user || user != 'shewchuk-eric') {
+    res.status(403).json({ message: 'Forbidden. You must be logged in as Admin to access this resource.' });
+    return;
+  }
   const orderId = new ObjectId(req.params.id);
   const status = {
     orderStatus: "complete"

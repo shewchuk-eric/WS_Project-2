@@ -1,8 +1,7 @@
 let username;
 
 const mongodb = require('../db/connect');
-const ObjectId = require('mongodb').ObjectId;
-//const curDate = require('../models/getDate');
+const ObjectId = require('mongodb').ObjectId; 
 const { userSchema, requireLogin, getToday } = require('../models/utilities');
 const today = getToday();
 
