@@ -23,7 +23,7 @@
     },
     "/customers/": {
       "get": {
-        "description": "List all customers in the system. Admin access required.",
+        "description": "",
         "produces": [
           "application/json"
         ],
@@ -32,14 +32,14 @@
             "description": "OK"
           },
           "403": {
-            "description": "Admin access required"
+            "description": "Forbidden"
           }
         }
       }
     },
     "/customers/writeNewCustomer/": {
       "post": {
-        "description": "Create new customer. Admin or new user can create.",
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -78,7 +78,7 @@
     },
     "/customers/updateCustomer/{id}": {
       "put": {
-        "description": "Update customer information using their ID #.",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -123,7 +123,7 @@
     },
     "/customers/deleteCustomer/{id}": {
       "delete": {
-        "description": "Delete a customer using their ID #.",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -144,7 +144,7 @@
     },
     "/customers/lastOrderDate/{id}": {
       "patch": {
-        "description": "Update last order date for a customer.",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -155,7 +155,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Update successful."
+            "description": "No Content"
           },
           "500": {
             "description": "Internal Server Error"
@@ -165,7 +165,7 @@
     },
     "/orders/": {
       "get": {
-        "description": "List all orders in the system. Requires admin access.",
+        "description": "",
         "produces": [
           "application/json"
         ],
@@ -174,14 +174,14 @@
             "description": "OK"
           },
           "403": {
-            "description": "Requires admin access."
+            "description": "Forbidden"
           }
         }
       }
     },
     "/orders/createOrder/": {
       "post": {
-        "description": "Create a new order.",
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -226,7 +226,7 @@
     },
     "/orders/updateOrder/{id}": {
       "put": {
-        "description": "Make changes to an existing order.",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -264,10 +264,10 @@
         ],
         "responses": {
           "204": {
-            "description": "Order updated"
+            "description": "No Content"
           },
           "400": {
-            "description": "Bad Request."
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -277,7 +277,7 @@
     },
     "/orders/cancelOrder/{id}": {
       "delete": {
-        "description": "Cancel a selected order. Requires order ID.",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -288,7 +288,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Order successfully canceled"
+            "description": "No Content"
           },
           "500": {
             "description": "Internal Server Error"
@@ -298,7 +298,7 @@
     },
     "/orders/updateOrderStatus/{id}": {
       "patch": {
-        "description": "Change order status to 'complete'. Admin access required.",
+        "description": "",
         "parameters": [
           {
             "name": "id",
@@ -309,10 +309,10 @@
         ],
         "responses": {
           "204": {
-            "description": "Update successful"
+            "description": "No Content"
           },
           "403": {
-            "description": "Admin access required"
+            "description": "Forbidden"
           },
           "500": {
             "description": "Internal Server Error"
