@@ -5,7 +5,7 @@
     "description": "Manage customers and their orders at my imaginary pizza factory with a MongoDB backend.",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "https://ws-project-2.onrender.com",
   "basePath": "/",
   "schemes": [
     "http"
