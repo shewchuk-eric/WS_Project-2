@@ -5,7 +5,7 @@ const doc = {
     title: 'My Pizza Ordering API',
     description: 'Manage customers and their orders at my imaginary pizza factory with a MongoDB backend.',
   },
-  host: 'ws-project-2.onrender.com'
+  host: 'ws-project-2.onrender.com' // change to localhost:3000 for local development
 };
 
 const outputFile = './swagger.json';
